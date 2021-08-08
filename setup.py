@@ -4,16 +4,16 @@ with open("README.md", "r") as readme:
     long_description = readme.read()
 
 setup(
-    name='try_improve_code',
+    name='sfilter',
     version='0.0.1',
     python_requires=">=3.9",
     author='Sasha Bondarev (Oleksandr)',
     author_email='alex.d.bondarev@gmail.com',
     license='MIT',
-    description='Package for improving Python code',
+    description='Tool for filtering out stinky/smelling code',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/alex-d-bondarev/try-improve-code',
+    url='https://github.com/alex-d-bondarev/sfilter',
     packages=find_packages(),
     install_requires=[
         'black==21.7b0',

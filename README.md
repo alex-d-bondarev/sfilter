@@ -1,9 +1,9 @@
-# try_improve_code POC
-Package for improving Python code
+# sfilter
+Tool for filtering out stinky/smelling code
 
 ## Example usage
 ```shell
-python -c'import try_improve.code as tic;tic.run_all("<path_to_project>")'
+python -c'import sfilter.main as sf;sf.run_all("<path_to_project>")'
 ```
 
 ## Build, install and check distribution readiness the project
@@ -13,9 +13,11 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
 pipenv shell
 python
 ```
+
 ```python
-import try_improve.code as tic
-tic.run_all("./try_improve")
+import src.sfilter.main as tic
+
+tic.run_all("src/sfilter")
 exit()
 ```
 ```shell
@@ -27,32 +29,32 @@ tar tzf dist/try_improve_code-<version>.tar.gz
 
 ## Run all checks
 ```shell
-PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.run_all("./try_improve")'
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_all("./sfilter")'
 ```
 
 ## Step by step
 
 1. Clean before analysis:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.clean_before_test()'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.clean_before_test()'
     ```
 1. Run black:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.run_black("./try_improve")'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_black("./sfilter")'
     ```
 1. Run isort:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.run_isort("./try_improve")'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_isort("./sfilter")'
     ```
 1. Run flake8:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.run_flake8("./try_improve")'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_flake8("./sfilter")'
     ```
 1. Run radon:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.run_radon("./try_improve")'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_radon("./sfilter")'
     ```
 1. Run final checks:
     ```shell
-    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import try_improve.code as tic;tic.check_quality()'
+    PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.check_quality()'
     ```
