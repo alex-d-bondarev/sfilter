@@ -13,17 +13,21 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
 pipenv shell
 python
 ```
-
 ```python
-import src.sfilter.main as tic
+import src.sfilter.main as sf
 
-tic.run_all("src/sfilter")
+sf.run_all("src/sfilter")
 exit()
 ```
 ```shell
 exit
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py sdist
-tar tzf dist/try_improve_code-<version>.tar.gz 
+tar tzf dist/sfilter-<version>.tar.gz 
+```
+
+## Publish
+```shell
+twine upload dist/*
 ```
 
 
