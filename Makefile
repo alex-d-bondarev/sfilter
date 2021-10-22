@@ -15,3 +15,4 @@ sfilter:
 
 pytest:
 	@echo "Run tests"
+	PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pytest -v
