@@ -1,43 +1,16 @@
 # sfilter
 Tool for filtering out stinky/smelling code
 
-## Example usage
+## Usage
+### How to
 ```shell
 python -c'import sfilter.main as sf;sf.run_all("<path_to_project>")'
 ```
-
-## Build, install and check distribution readiness the project
-```shell
-PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py bdist_wheel
-PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
-pipenv shell
-python
-```
-```python
-import src.sfilter.main as sf
-
-sf.run_all("src/sfilter")
-exit()
-```
-```shell
-exit
-PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py sdist
-tar tzf dist/sfilter-<version>.tar.gz 
-```
-
-## Publish
-```shell
-twine upload dist/*
-```
-
-
-## Run all checks
+### Run all checks example
 ```shell
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_all("./sfilter")'
 ```
-
-## Step by step
-
+### Run step by step example
 1. Clean before analysis:
     ```shell
     PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.clean_before_test()'
@@ -62,3 +35,31 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.ru
     ```shell
     PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.check_quality()'
     ```
+## Install and test the project
+```shell
+make install
+make test
+```
+## Publish
+### Prepare to publish the project
+```shell
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py bdist_wheel
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
+pipenv shell
+python
+```
+```python
+import src.sfilter.main as sf
+
+sf.run_all("src/sfilter")
+exit()
+```
+```shell
+exit
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py sdist
+tar tzf dist/sfilter-<version>.tar.gz 
+```
+### Upload to pypi
+```shell
+twine upload dist/*
+```
