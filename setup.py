@@ -5,7 +5,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='sfilter',
-    version='0.0.2',
+    version='0.1.0',
     python_requires=">=3.9",
     author='Sasha Bondarev (Oleksandr)',
     author_email='alex.d.bondarev@gmail.com',
@@ -22,10 +22,12 @@ setup(
         'radon==4.1.0',
     ],
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Topic :: Software Development :: Quality Assurance",
     ]
 )

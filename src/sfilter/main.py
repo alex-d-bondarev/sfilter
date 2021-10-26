@@ -1,6 +1,8 @@
 import json
 import os
 
+from src.sfilter.tools.black import run_black
+
 
 def clean_before_test():
     """Clean up analysis logs before tests"""
@@ -27,11 +29,15 @@ def check_quality():
 
     if len(before) != 0:
         assert int(before["flake8"]) >= new_flake8, (
+            f"Flake8 score was {before['flake8']} "
+            f"but became {new_flake8}. "
             "You have introduced new pip8 errors. "
             "Please check flake8.log for details. "
             "Please fix all new and maybe some old errors"
         )
         assert float(before["mi"]) <= new_mi, (
+            f"Radon maintainability index was {before['mi']} "
+            f"but became {new_mi}"
             "You have made code less maintainable. "
             "Please check radon.log for details. "
             "Please improve maintainability back. "
@@ -49,9 +55,9 @@ def _read_before_dict():
     project_quality = os.path.join(root_dir, "./project_quality.txt")
 
     if os.path.exists(project_quality):
-        for l in open(project_quality):
-            if not l.startswith("#"):
-                k, v = l.rstrip().split("=")
+        for line in open(project_quality):
+            if not line.startswith("#"):
+                k, v = line.rstrip().split("=")
                 before_dict[k] = v
 
     return before_dict
@@ -83,10 +89,6 @@ def _save_new_results(new_flake8, new_mi):
     file.truncate(0)
     file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
     file.write(f"# Goal is '100'\nmi={new_mi}\n")
-
-
-def run_black(dir_path):
-    os.system(f"black {dir_path}")
 
 
 def run_isort(dir_path):
