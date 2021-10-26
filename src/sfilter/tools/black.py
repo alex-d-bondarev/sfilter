@@ -5,8 +5,6 @@ https://github.com/psf/black/blob/b1d060101626aa1c332f52e4bdf0ae5e4cc07990/tests
 import black
 from click.testing import CliRunner
 
+
 def run_black(path: str):
-    CliRunner().invoke(
-        black.main,
-        [path]
-    )
+    CliRunner().invoke(black.main, [path])
