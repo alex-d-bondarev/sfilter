@@ -3,7 +3,7 @@
 default:
 	@echo "The following commands are supported:"
 	@echo "install \t # Install project dependencies"
-	@echo "test \t # Test the project"
+	@echo "test \t\t # Test the project"
 
 install:
 	pipenv install

@@ -1,4 +1,4 @@
-# sfilter
+# sfilter (Pre-Alpha)
 Tool for filtering out stinky/smelling code
 
 ## Usage

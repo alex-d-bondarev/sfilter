@@ -1,6 +1,8 @@
 import json
 import os
 
+from src.sfilter.tools.black import run_black
+
 
 def clean_before_test():
     """Clean up analysis logs before tests"""
@@ -83,10 +85,6 @@ def _save_new_results(new_flake8, new_mi):
     file.truncate(0)
     file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
     file.write(f"# Goal is '100'\nmi={new_mi}\n")
-
-
-def run_black(dir_path):
-    os.system(f"black {dir_path}")
 
 
 def run_isort(dir_path):
