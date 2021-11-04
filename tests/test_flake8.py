@@ -3,7 +3,7 @@ import pathlib
 
 import pytest  # noqa
 
-from src.sfilter.main import run_flake8
+from src.sfilter.tools.flake8 import run_flake8
 from tests.fixtures import create_temp_file  # noqa
 
 

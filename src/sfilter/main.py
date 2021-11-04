@@ -95,10 +95,6 @@ def run_isort(dir_path):
     os.system(f"isort {dir_path}")
 
 
-def run_flake8(dir_path):
-    os.system(f"flake8 {dir_path} --output-file=flake8.log --exit-zero")
-
-
 def run_radon(dir_path):
     os.system(f"radon mi {dir_path} --json --output-file=radon.log")
 
