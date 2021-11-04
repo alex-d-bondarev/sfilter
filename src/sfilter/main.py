@@ -2,6 +2,7 @@ import json
 import os
 
 from src.sfilter.tools.black import run_black
+from src.sfilter.tools.flake8 import run_flake8
 
 
 def clean_before_test():

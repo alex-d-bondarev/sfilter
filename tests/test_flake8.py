@@ -24,9 +24,7 @@ def test_flake8(create_temp_file):
 
 
 def _get_flake8_log_content_and_clean_up():
-    path_to_flake8_log = os.path.join(
-        pathlib.Path(__file__).parent.resolve(), "flake8.log"
-    )
+    path_to_flake8_log = _get_log_path()
     file_content = ""
 
     for line in open(path_to_flake8_log):
@@ -35,3 +33,15 @@ def _get_flake8_log_content_and_clean_up():
     os.remove(path_to_flake8_log)
 
     return file_content
+
+
+def _get_log_path():
+    path = os.path.join(
+        pathlib.Path(__file__).parent.resolve(), "flake8.log"
+    )
+    if os.path.isfile(path):
+        return path
+    else:
+        return os.path.join(
+            pathlib.Path(__file__).parent.parent.resolve(), "flake8.log"
+        )
