@@ -2,6 +2,7 @@ import json
 import os
 
 from src.sfilter.tools.black import run_black
+from src.sfilter.tools.flake8 import run_flake8
 
 
 def clean_before_test():
@@ -93,10 +94,6 @@ def _save_new_results(new_flake8, new_mi):
 
 def run_isort(dir_path):
     os.system(f"isort {dir_path}")
-
-
-def run_flake8(dir_path):
-    os.system(f"flake8 {dir_path} --output-file=flake8.log --exit-zero")
 
 
 def run_radon(dir_path):
