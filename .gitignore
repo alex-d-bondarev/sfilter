@@ -1,5 +1,8 @@
 *.log
+!flake8.log
+!radon.log
 *.txt
+!project_quality.txt
 __pycache__/
 build/
 dist/
