@@ -9,7 +9,7 @@ from tests.fixtures import create_temp_file  # noqa
     "file_content": "import pathlib\nimport os"
 }], indirect=True)
 def test_isort(create_temp_file):
-    """Test that flake8 is launched"""
+    """Test that isort is launched"""
     expected = "import os\nimport pathlib\n"
     actual = ""
     run_isort(create_temp_file)
