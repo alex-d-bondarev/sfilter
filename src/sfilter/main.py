@@ -4,6 +4,7 @@ import os
 from src.sfilter.tools.black import run_black
 from src.sfilter.tools.flake8 import run_flake8
 from src.sfilter.tools.isort import run_isort
+from src.sfilter.tools.radon import run_radon
 
 
 def clean_before_test():
@@ -91,10 +92,6 @@ def _save_new_results(new_flake8, new_mi):
     file.truncate(0)
     file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
     file.write(f"# Goal is '100'\nmi={new_mi}\n")
-
-
-def run_radon(dir_path):
-    os.system(f"radon mi {dir_path} --json --output-file=radon.log")
 
 
 def run_all(dir_path):
