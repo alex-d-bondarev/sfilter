@@ -2,7 +2,7 @@ import os
 import pathlib
 
 
-class FileUtils(object):
+class FileTestUtils(object):
     """
     File utilities for tests
     """
