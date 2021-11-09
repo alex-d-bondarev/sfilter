@@ -9,6 +9,6 @@ class NonExistingFile(FileHandlerInterface):
         """This file does not exist. Raise exception"""
         raise FileNotFoundError()
 
-    def delete_file(self) -> FileHandlerInterface:
+    def delete(self) -> FileHandlerInterface:
         """Return self as already deleted/non-existing file"""
         return self

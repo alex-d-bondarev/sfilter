@@ -17,7 +17,7 @@ class ExistingFile(FileHandlerInterface):
         """
         return self.path_to_file.read_text()
 
-    def delete_file(self) -> FileHandlerInterface:
+    def delete(self) -> FileHandlerInterface:
         """Self evident"""
         self.path_to_file.unlink(missing_ok=True)
         return NonExistingFile()

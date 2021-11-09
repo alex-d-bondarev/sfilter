@@ -16,6 +16,6 @@ def test_radon(create_temp_file):
 
     file_util = find_file("radon.log")
     actual_content = file_util.get_file_content()
-    file_util.delete_file()
+    file_util.delete()
 
     assert expected_content in actual_content

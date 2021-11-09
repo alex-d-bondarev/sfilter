@@ -10,6 +10,6 @@ class FileHandlerInterface:
         """
         pass
 
-    def delete_file(self) -> FileHandlerInterface:
+    def delete(self) -> FileHandlerInterface:
         """Self evident"""
         pass

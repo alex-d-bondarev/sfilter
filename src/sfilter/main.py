@@ -1,27 +1,17 @@
 import json
 import os
 
+from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.black import run_black
 from src.sfilter.tools.flake8 import run_flake8
 from src.sfilter.tools.isort import run_isort
 from src.sfilter.tools.radon import run_radon
 
 
-def clean_before_test():
+def clean_before_test() -> None:
     """Clean up analysis logs before tests"""
-    root_dir = os.path.dirname(os.curdir)
-    flake8_log = os.path.join(root_dir, "./flake8.log")
-    radon_log = os.path.join(root_dir, "./radon.log")
-
-    _trancate_file(flake8_log)
-    _trancate_file(radon_log)
-
-
-def _trancate_file(file_path):
-    if os.path.exists(file_path):
-        file = open(file_path, "r+")
-        file.truncate(0)
-        file.close()
+    find_file("flake8.log").delete()
+    find_file("radon.log").delete()
 
 
 def check_quality():
