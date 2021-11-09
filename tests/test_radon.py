@@ -1,7 +1,7 @@
 import pytest  # noqa
 
+from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.radon import run_radon
-from src.sfilter.file_helper import FileHelper
 from tests.fixtures import create_temp_file  # noqa
 
 
@@ -14,7 +14,7 @@ def test_radon(create_temp_file):
     expected_content = "{\"mi\": 100.0, \"rank\": \"A\"}"
     run_radon(create_temp_file)
 
-    file_util = FileHelper("radon.log")
+    file_util = find_file("radon.log")
     actual_content = file_util.get_file_content()
     file_util.delete_file()
 

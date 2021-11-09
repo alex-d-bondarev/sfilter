@@ -1,7 +1,7 @@
 import pytest  # noqa
 
+from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.flake8 import run_flake8
-from src.sfilter.file_helper import FileHelper
 from tests.fixtures import create_temp_file  # noqa
 
 
@@ -15,9 +15,9 @@ def test_flake8(create_temp_file):
     error2 = "W292 no newline at end of file"
     run_flake8(create_temp_file)
 
-    file_util = FileHelper("flake8.log")
-    actual_content = file_util.get_file_content()
-    file_util.delete_file()
+    file_handler = find_file("flake8.log")
+    actual_content = file_handler.get_file_content()
+    file_handler.delete_file()
 
     assert error1 in actual_content
     assert error2 in actual_content
