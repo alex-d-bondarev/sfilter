@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-class FileUtils(object):
+class FileHelper(object):
     """File utilities"""
 
     def __init__(self, name: str):
