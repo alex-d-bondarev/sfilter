@@ -1,7 +1,7 @@
 import pytest  # noqa
 
 from src.sfilter.tools.radon import run_radon
-from src.sfilter.file_utils import FileHelper
+from src.sfilter.file_helper import FileHelper
 from tests.fixtures import create_temp_file  # noqa
 
 
