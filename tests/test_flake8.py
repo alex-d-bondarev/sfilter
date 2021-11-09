@@ -16,7 +16,7 @@ def test_flake8(create_temp_file):
     run_flake8(create_temp_file)
 
     file_handler = find_file("flake8.log")
-    actual_content = file_handler.get_file_content()
+    actual_content = file_handler.get_content()
     file_handler.delete()
 
     assert error1 in actual_content

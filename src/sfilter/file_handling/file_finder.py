@@ -15,4 +15,4 @@ def find_file(name: str) -> FileHandlerInterface:
     try:
         return ExistingFile(next(Path().parent.parent.glob(name)))
     except StopIteration:
-        return NonExistingFile()
+        return NonExistingFile(name)
