@@ -1,7 +1,7 @@
 import pytest  # noqa
 
 from src.sfilter.tools.radon import run_radon
-from tests.file_utils import FileTestUtils
+from src.sfilter.file_utils import FileUtils
 from tests.fixtures import create_temp_file  # noqa
 
 
@@ -12,9 +12,9 @@ from tests.fixtures import create_temp_file  # noqa
 def test_radon(create_temp_file):
     """Test that radon is launched"""
     expected_content = "{\"mi\": 100.0, \"rank\": \"A\"}"
-    file_util = FileTestUtils("radon.log")
-
     run_radon(create_temp_file)
+
+    file_util = FileUtils("radon.log")
     actual_content = file_util.get_file_content()
     file_util.delete_file()
 
