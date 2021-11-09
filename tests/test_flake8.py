@@ -1,7 +1,7 @@
 import pytest  # noqa
 
+from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.flake8 import run_flake8
-from tests.file_utils import FileTestUtils
 from tests.fixtures import create_temp_file  # noqa
 
 
@@ -13,11 +13,11 @@ def test_flake8(create_temp_file):
     """Test that flake8 is launched"""
     error1 = "F401 'os' imported but unused"
     error2 = "W292 no newline at end of file"
-    file_util = FileTestUtils("flake8.log")
+    run_flake8(create_temp_file.name())
 
-    run_flake8(create_temp_file)
-    actual_content = file_util.get_file_content()
-    file_util.delete_file()
+    file_handler = find_file("flake8.log")
+    actual_content = file_handler.get_content()
+    file_handler.delete()
 
     assert error1 in actual_content
     assert error2 in actual_content

@@ -11,10 +11,8 @@ from tests.fixtures import create_temp_file  # noqa
 def test_isort(create_temp_file):
     """Test that isort is launched"""
     expected = "import os\nimport pathlib\n"
-    actual = ""
-    run_isort(create_temp_file)
 
-    for line in open(create_temp_file):
-        actual += line
+    run_isort(create_temp_file.name())
+    actual = create_temp_file.get_content()
 
     assert actual == expected

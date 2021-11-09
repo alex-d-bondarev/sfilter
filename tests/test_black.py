@@ -11,10 +11,8 @@ from tests.fixtures import create_temp_file  # noqa
 def test_black(create_temp_file):
     """Test that black is launched"""
     expected = "import os\n"
-    actual = ""
-    run_black(create_temp_file)
 
-    for line in open(create_temp_file):
-        actual += line
+    run_black(create_temp_file.name())
+    actual = create_temp_file.get_content()
 
     assert actual == expected
