@@ -13,7 +13,7 @@ def test_flake8(create_temp_file):
     """Test that flake8 is launched"""
     error1 = "F401 'os' imported but unused"
     error2 = "W292 no newline at end of file"
-    run_flake8(create_temp_file)
+    run_flake8(create_temp_file.name())
 
     file_handler = find_file("flake8.log")
     actual_content = file_handler.get_content()

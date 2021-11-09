@@ -10,6 +10,10 @@ class FileHandlerInterface:
         """
         pass
 
+    def name(self) -> str:
+        """Return filename"""
+        pass
+
     def write(self, text: str) -> FileHandlerInterface:
         """Write given text to file
         :param text:

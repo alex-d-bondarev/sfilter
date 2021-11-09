@@ -1,20 +1,15 @@
-import os
-import pathlib
-
 import pytest  # noqa
+
+from src.sfilter.file_handling.file_finder import find_file
+from src.sfilter.file_handling.file_handler_interface import FileHandlerInterface
 
 
 @pytest.fixture
-def create_temp_file(request):
+def create_temp_file(request) -> FileHandlerInterface:
     """Create temporary test file"""
-    path_to_file = os.path.join(
-        pathlib.Path(__file__).parent.resolve(), request.param["file_name"]
-    )
-    file = open(path_to_file, "w")
-    file.truncate(0)
-    file.write(request.param["file_content"])
-    file.close()
+    temp_file = find_file(request.param["file_name"])
+    temp_file = temp_file.write(request.param["file_content"])
 
-    yield path_to_file
+    yield temp_file
 
-    os.remove(path_to_file)
+    temp_file.delete()

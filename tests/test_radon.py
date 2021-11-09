@@ -12,7 +12,7 @@ from tests.fixtures import create_temp_file  # noqa
 def test_radon(create_temp_file):
     """Test that radon is launched"""
     expected_content = "{\"mi\": 100.0, \"rank\": \"A\"}"
-    run_radon(create_temp_file)
+    run_radon(create_temp_file.name())
 
     file_util = find_file("radon.log")
     actual_content = file_util.get_content()

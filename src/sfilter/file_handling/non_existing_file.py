@@ -15,6 +15,10 @@ class NonExistingFile(FileHandlerInterface):
         """This file does not exist. Raise exception"""
         raise FileNotFoundError(self.name)
 
+    def name(self) -> str:
+        """Return filename"""
+        return self.name()
+
     def write(self, text: str) -> FileHandlerInterface:
         """Create new file and write given text to it
         :param text:

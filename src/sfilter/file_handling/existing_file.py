@@ -17,6 +17,10 @@ class ExistingFile(FileHandlerInterface):
         """
         return self.path_to_file.read_text()
 
+    def name(self) -> str:
+        """Return filename"""
+        return self.path_to_file.name
+
     def write(self, text: str) -> FileHandlerInterface:
         """Overwrite file content with the given text
         :param text:
