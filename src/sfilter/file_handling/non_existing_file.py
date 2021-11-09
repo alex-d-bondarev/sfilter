@@ -17,7 +17,7 @@ class NonExistingFile(FileHandlerInterface):
 
     def name(self) -> str:
         """Return filename"""
-        return self.name()
+        return self.name
 
     def write(self, text: str) -> FileHandlerInterface:
         """Create new file and write given text to it
