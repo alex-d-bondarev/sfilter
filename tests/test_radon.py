@@ -14,8 +14,8 @@ def test_radon(create_temp_file):
     expected_content = "{\"mi\": 100.0, \"rank\": \"A\"}"
     run_radon(create_temp_file.name())
 
-    file_util = find_file("radon.log")
-    actual_content = file_util.get_content()
-    file_util.delete()
+    file_handler = find_file("radon.log")
+    actual_content = file_handler.get_content()
+    file_handler.delete()
 
     assert expected_content in actual_content
