@@ -1,8 +1,6 @@
 *.log
-!flake8.txt
-!radon.json
 *.txt
-!sfilter.txt
+!flake8.txt
 __pycache__/
 build/
 dist/

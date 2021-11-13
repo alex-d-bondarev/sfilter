@@ -17,7 +17,7 @@ def clean_before_test() -> None:
 
 def check_quality():
     """Analyse code quality"""
-    before = _read_sfilter_metrics()
+    before = _read_sfilter_properties()
     new_flake8 = _get_new_flake8_stats()
     new_mi = _get_new_mi_stats()
 
@@ -43,18 +43,22 @@ def check_quality():
     assert True, "Good work!"
 
 
-def _read_sfilter_metrics() -> Dict:
+def _read_sfilter_properties() -> Dict:
     before_dict = dict()
-    s_file = find_file("sfilter.txt")
+    s_file = find_file("sfilter.properties")
 
     if s_file.exists():
-        s_file_content = s_file.get_content()
-        for line in s_file_content.split("\n"):
-            if _is_property(line):
-                k, v = line.rstrip().split("=")
-                before_dict[k] = v
+        _parse_properties_into_dict(before_dict, s_file)
 
     return before_dict
+
+
+def _parse_properties_into_dict(before_dict, s_file):
+    s_file_content = s_file.get_content()
+    for line in s_file_content.split("\n"):
+        if _is_property(line):
+            k, v = line.rstrip().split("=")
+            before_dict[k] = v
 
 
 def _is_property(line):
@@ -82,7 +86,7 @@ def _get_new_mi_stats():
 
 def _save_new_results(new_flake8, new_mi):
     root_dir = os.path.dirname(os.curdir)
-    project_quality = os.path.join(root_dir, "./sfilter.txt")
+    project_quality = os.path.join(root_dir, "./sfilter.properties")
     file = open(project_quality, "w")
     file.truncate(0)
     file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
