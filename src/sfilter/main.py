@@ -10,7 +10,7 @@ from src.sfilter.tools.radon import run_radon
 
 def clean_before_test() -> None:
     """Clean up analysis logs before tests"""
-    find_file("flake8.log").delete()
+    find_file("flake8.txt").delete()
     find_file("radon.json").delete()
 
 
@@ -25,7 +25,7 @@ def check_quality():
             f"Flake8 score was {before['flake8']} "
             f"but became {new_flake8}. "
             "You have introduced new pip8 errors. "
-            "Please check flake8.log for details. "
+            "Please check flake8.txt for details. "
             "Please fix all new and maybe some old errors"
         )
         assert float(before["mi"]) <= new_mi, (
@@ -58,7 +58,7 @@ def _read_before_dict():
 
 def _get_new_flake8_stats():
     root_dir = os.path.dirname(os.curdir)
-    flake8_log = os.path.join(root_dir, "./flake8.log")
+    flake8_log = os.path.join(root_dir, "./flake8.txt")
     return len(open(flake8_log).readlines())
 
 

@@ -15,7 +15,7 @@ def test_flake8(create_temp_file):
     error2 = "W292 no newline at end of file"
     run_flake8(create_temp_file.name())
 
-    file_handler = find_file("flake8.log")
+    file_handler = find_file("flake8.txt")
     actual_content = file_handler.get_content()
     file_handler.delete()
 

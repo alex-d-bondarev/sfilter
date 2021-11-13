@@ -1,5 +1,5 @@
 *.log
-!flake8.log
+!flake8.txt
 !radon.json
 *.txt
 !project_quality.txt
