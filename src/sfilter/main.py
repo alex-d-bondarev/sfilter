@@ -11,7 +11,7 @@ from src.sfilter.tools.radon import run_radon
 def clean_before_test() -> None:
     """Clean up analysis logs before tests"""
     find_file("flake8.log").delete()
-    find_file("radon.log").delete()
+    find_file("radon.json").delete()
 
 
 def check_quality():
@@ -32,7 +32,7 @@ def check_quality():
             f"Radon maintainability index was {before['mi']} "
             f"but became {new_mi}"
             "You have made code less maintainable. "
-            "Please check radon.log for details. "
+            "Please check radon.json for details. "
             "Please improve maintainability back. "
             "Appreciate if you make it even better. "
         )
@@ -64,7 +64,7 @@ def _get_new_flake8_stats():
 
 def _get_new_mi_stats():
     root_dir = os.path.dirname(os.curdir)
-    radon_log = os.path.join(root_dir, "./radon.log")
+    radon_log = os.path.join(root_dir, "./radon.json")
     radon_log_file = open(radon_log)
     radon_dict = json.load(radon_log_file)
     mi_scores = 0

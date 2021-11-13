@@ -14,7 +14,7 @@ def test_radon(create_temp_file):
     expected_content = "{\"mi\": 100.0, \"rank\": \"A\"}"
     run_radon(create_temp_file.name())
 
-    file_handler = find_file("radon.log")
+    file_handler = find_file("radon.json")
     actual_content = file_handler.get_content()
     file_handler.delete()
 

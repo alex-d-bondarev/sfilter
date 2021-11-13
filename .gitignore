@@ -1,6 +1,6 @@
 *.log
 !flake8.log
-!radon.log
+!radon.json
 *.txt
 !project_quality.txt
 __pycache__/
