@@ -2,7 +2,7 @@
 !flake8.txt
 !radon.json
 *.txt
-!project_quality.txt
+!sfilter.txt
 __pycache__/
 build/
 dist/

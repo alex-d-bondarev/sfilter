@@ -45,7 +45,7 @@ def check_quality():
 def _read_before_dict():
     before_dict = dict()
     root_dir = os.path.dirname(os.curdir)
-    project_quality = os.path.join(root_dir, "./project_quality.txt")
+    project_quality = os.path.join(root_dir, "./sfilter.txt")
 
     if os.path.exists(project_quality):
         for line in open(project_quality):
@@ -77,7 +77,7 @@ def _get_new_mi_stats():
 
 def _save_new_results(new_flake8, new_mi):
     root_dir = os.path.dirname(os.curdir)
-    project_quality = os.path.join(root_dir, "./project_quality.txt")
+    project_quality = os.path.join(root_dir, "./sfilter.txt")
     file = open(project_quality, "w")
     file.truncate(0)
     file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
