@@ -1,8 +1,7 @@
 from pathlib import Path
 
+from src.sfilter.file_handling.abstract_file_handler import AFileHandler
 from src.sfilter.file_handling.existing_file import ExistingFile
-from src.sfilter.file_handling.abstract_file_handler import \
-    AFileHandler
 from src.sfilter.file_handling.non_existing_file import NonExistingFile
 
 

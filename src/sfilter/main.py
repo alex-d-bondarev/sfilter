@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Dict
 
 from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.black import run_black
@@ -16,7 +17,7 @@ def clean_before_test() -> None:
 
 def check_quality():
     """Analyse code quality"""
-    before = _read_before_dict()
+    before = _read_sfilter_metrics()
     new_flake8 = _get_new_flake8_stats()
     new_mi = _get_new_mi_stats()
 
@@ -42,18 +43,22 @@ def check_quality():
     assert True, "Good work!"
 
 
-def _read_before_dict():
+def _read_sfilter_metrics() -> Dict:
     before_dict = dict()
-    root_dir = os.path.dirname(os.curdir)
-    project_quality = os.path.join(root_dir, "./sfilter.txt")
+    s_file = find_file("sfilter.txt")
 
-    if os.path.exists(project_quality):
-        for line in open(project_quality):
-            if not line.startswith("#"):
+    if s_file.exists():
+        s_file_content = s_file.get_content()
+        for line in s_file_content.split("\n"):
+            if _is_property(line):
                 k, v = line.rstrip().split("=")
                 before_dict[k] = v
 
     return before_dict
+
+
+def _is_property(line):
+    return line and not line.startswith("#")
 
 
 def _get_new_flake8_stats():

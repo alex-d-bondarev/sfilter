@@ -1,8 +1,7 @@
 from pathlib import Path
 
 from src.sfilter.file_handling import existing_file
-from src.sfilter.file_handling.abstract_file_handler import \
-    AFileHandler
+from src.sfilter.file_handling.abstract_file_handler import AFileHandler
 
 
 class NonExistingFile(AFileHandler):
@@ -16,6 +15,7 @@ class NonExistingFile(AFileHandler):
         return self
 
     def exists(self) -> bool:
+        """:return: False (it does not exist)"""
         return False
 
     def get_content(self) -> str:
