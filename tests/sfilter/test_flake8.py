@@ -2,7 +2,7 @@ import pytest  # noqa
 
 from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.flake8 import run_flake8
-from tests.fixtures import create_temp_file  # noqa
+from tests.sfilter.fixtures import create_temp_file  # noqa
 
 
 @pytest.mark.parametrize("create_temp_file", [{
