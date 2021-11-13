@@ -1,11 +1,11 @@
 from pathlib import Path
 
 from src.sfilter.file_handling import existing_file
-from src.sfilter.file_handling.file_handler_interface import \
-    FileHandlerInterface
+from src.sfilter.file_handling.abstract_file_handler import \
+    AFileHandler
 
 
-class NonExistingFile(FileHandlerInterface):
+class NonExistingFile(AFileHandler):
     """Simplify delete flow"""
 
     def __init__(self, name):
@@ -19,7 +19,7 @@ class NonExistingFile(FileHandlerInterface):
         """Return filename"""
         return self.name
 
-    def write(self, text: str) -> FileHandlerInterface:
+    def write(self, text: str) -> AFileHandler:
         """Create new file and write given text to it
         :param text:
         """
@@ -28,7 +28,6 @@ class NonExistingFile(FileHandlerInterface):
         new_file.write_text(text)
         return existing_file.ExistingFile(new_file)
 
-
-def delete(self) -> FileHandlerInterface:
-    """Return self as already deleted/non-existing file"""
-    return self
+    def delete(self) -> AFileHandler:
+        """Return self as already deleted/non-existing file"""
+        return self
