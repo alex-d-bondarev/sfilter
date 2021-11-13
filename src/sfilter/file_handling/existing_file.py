@@ -11,6 +11,14 @@ class ExistingFile(AFileHandler):
     def __init__(self, path: Path):
         self.path_to_file = path
 
+    def delete(self) -> AFileHandler:
+        """Self evident"""
+        self.path_to_file.unlink(missing_ok=True)
+        return non_existing_file.NonExistingFile(self.path_to_file.name)
+
+    def exists(self) -> bool:
+        return True
+
     def get_content(self) -> str:
         """Get content of the file that was given in constructor
         :return: file content as text
@@ -27,8 +35,3 @@ class ExistingFile(AFileHandler):
         """
         self.path_to_file.write_text(text)
         return self
-
-    def delete(self) -> AFileHandler:
-        """Self evident"""
-        self.path_to_file.unlink(missing_ok=True)
-        return non_existing_file.NonExistingFile(self.path_to_file.name)

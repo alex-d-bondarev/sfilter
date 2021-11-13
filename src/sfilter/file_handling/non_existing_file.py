@@ -11,6 +11,13 @@ class NonExistingFile(AFileHandler):
     def __init__(self, name):
         self.name = name
 
+    def delete(self) -> AFileHandler:
+        """Return self as already deleted/non-existing file"""
+        return self
+
+    def exists(self) -> bool:
+        return False
+
     def get_content(self) -> str:
         """This file does not exist. Raise exception"""
         raise FileNotFoundError(self.name)
@@ -27,7 +34,3 @@ class NonExistingFile(AFileHandler):
         new_file.touch()
         new_file.write_text(text)
         return existing_file.ExistingFile(new_file)
-
-    def delete(self) -> AFileHandler:
-        """Return self as already deleted/non-existing file"""
-        return self

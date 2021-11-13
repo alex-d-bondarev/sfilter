@@ -7,6 +7,16 @@ class AFileHandler(ABC):
     """Describe methods for file handling"""
 
     @abstractmethod
+    def delete(self) -> AFileHandler:
+        """Self evident"""
+        pass
+
+    @abstractmethod
+    def exists(self) -> bool:
+        """return True if file exists, else False"""
+        pass
+
+    @abstractmethod
     def get_content(self) -> str:
         """Get content of the file that was given in constructor
         :return: file content as text
@@ -23,9 +33,4 @@ class AFileHandler(ABC):
         """Write given text to file
         :param text:
         """
-        pass
-
-    @abstractmethod
-    def delete(self) -> AFileHandler:
-        """Self evident"""
         pass
