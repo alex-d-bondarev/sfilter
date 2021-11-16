@@ -7,6 +7,7 @@ from src.sfilter.file_handling.file_finder import find_file
 
 class SetUpHandler:
     """Handle setup.cfg"""
+
     def __init__(self):
         self.config = configparser.ConfigParser(allow_no_value=True)
         self.config_file = find_file("setup.cfg")

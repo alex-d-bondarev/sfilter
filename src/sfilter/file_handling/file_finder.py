@@ -12,8 +12,6 @@ def find_file(name: str) -> AFileHandler:
     :return:
     """
     try:
-        return ExistingFile(next(
-            Path(__file__).parent.parent.parent.parent.glob(name)
-        ))
+        return ExistingFile(next(Path(__file__).parent.parent.parent.parent.glob(name)))
     except StopIteration:
         return NonExistingFile(name)

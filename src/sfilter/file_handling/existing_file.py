@@ -22,7 +22,7 @@ class ExistingFile(AFileHandler):
         return True
 
     def file_path(self) -> str:
-        """This file does not exist. Raise exception"""
+        """Self evident"""
         return os.fspath(self.path_to_file.resolve())
 
     def get_content(self) -> str:
@@ -36,7 +36,7 @@ class ExistingFile(AFileHandler):
         return self.path_to_file.name
 
     def writable_file(self) -> TextIO:
-        """This file does not exist. Raise  exception"""
+        """Object that allows to write to path_to_file"""
         return self.path_to_file.open("w")
 
     def write(self, text: str) -> AFileHandler:
