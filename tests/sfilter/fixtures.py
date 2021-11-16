@@ -16,3 +16,15 @@ def create_temp_file(request) -> AFileHandler:
     yield temp_file
 
     temp_file.delete()
+
+
+@pytest.fixture
+def roll_back_file(request) -> None:
+    """Read file content before the test
+    and roll it back after"""
+    updatable_file = find_file(request.param)
+    initial_content = updatable_file.get_content()
+
+    yield
+
+    updatable_file.write(initial_content)
