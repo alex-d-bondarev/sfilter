@@ -1,8 +1,7 @@
 import json
-import os
-from typing import Dict
 
 from src.sfilter.file_handling.file_finder import find_file
+from src.sfilter.setup_handler import SetUpHandler
 from src.sfilter.tools.black import run_black
 from src.sfilter.tools.flake8 import run_flake8
 from src.sfilter.tools.isort import run_isort
@@ -17,20 +16,24 @@ def clean_before_test() -> None:
 
 def check_quality():
     """Analyse code quality"""
-    before = _read_sfilter_properties()
-    new_flake8 = _get_new_flake8_stats()
+    setup = SetUpHandler()
+    new_number_of_flake8_flags = _count_flake8_flags()
     new_mi = _get_new_mi_stats()
 
-    if len(before) != 0:
-        assert int(before["flake8"]) >= new_flake8, (
-            f"Flake8 score was {before['flake8']} "
-            f"but became {new_flake8}. "
+    if setup.get("flake8") is not None:
+        flake8_before = setup.get("flake8")
+        assert int(flake8_before) >= new_number_of_flake8_flags, (
+            f"Flake8 score was {flake8_before} "
+            f"but became {new_number_of_flake8_flags}. "
             "You have introduced new pip8 errors. "
             "Please check flake8.txt for details. "
             "Please fix all new and maybe some old errors"
         )
-        assert float(before["mi"]) <= new_mi, (
-            f"Radon maintainability index was {before['mi']} "
+
+    if setup.get("mi") is not None:
+        mi_before = setup.get("mi")
+        assert float(mi_before) <= new_mi, (
+            f"Radon maintainability index was {mi_before} "
             f"but became {new_mi}"
             "You have made code less maintainable. "
             "Please check radon.json for details. "
@@ -38,19 +41,11 @@ def check_quality():
             "Appreciate if you make it even better. "
         )
 
-    _save_new_results(new_flake8, new_mi)
+    setup.set("flake8", str(new_number_of_flake8_flags))
+    setup.set("mi", str(new_mi))
+    setup.save()
 
     assert True, "Good work!"
-
-
-def _read_sfilter_properties() -> Dict:
-    before_dict = dict()
-    s_file = find_file("sfilter.properties")
-
-    if s_file.exists():
-        _parse_properties_into_dict(before_dict, s_file)
-
-    return before_dict
 
 
 def _parse_properties_into_dict(before_dict, s_file):
@@ -65,32 +60,21 @@ def _is_property(line):
     return line and not line.startswith("#")
 
 
-def _get_new_flake8_stats():
-    root_dir = os.path.dirname(os.curdir)
-    flake8_log = os.path.join(root_dir, "./flake8.txt")
-    return len(open(flake8_log).readlines())
+def _count_flake8_flags() -> int:
+    last_line_does_not_count = 1
+    flake8_content = find_file("flake8.txt").get_content()
+    return len(flake8_content.split("\n")) - last_line_does_not_count
 
 
-def _get_new_mi_stats():
-    root_dir = os.path.dirname(os.curdir)
-    radon_log = os.path.join(root_dir, "./radon.json")
-    radon_log_file = open(radon_log)
-    radon_dict = json.load(radon_log_file)
+def _get_new_mi_stats() -> float:
+    radon_content = find_file("radon.json").get_content()
+    radon_dict = json.loads(radon_content)
     mi_scores = 0
 
     for stat in radon_dict.items():
         mi_scores += float(stat[1]["mi"])
 
     return mi_scores / len(radon_dict)
-
-
-def _save_new_results(new_flake8, new_mi):
-    root_dir = os.path.dirname(os.curdir)
-    project_quality = os.path.join(root_dir, "./sfilter.properties")
-    file = open(project_quality, "w")
-    file.truncate(0)
-    file.write(f"# Goal is '0'\nflake8={new_flake8}\n")
-    file.write(f"# Goal is '100'\nmi={new_mi}\n")
 
 
 def run_all(dir_path):

@@ -1,14 +1,14 @@
 import pytest  # noqa
-
 from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.tools.flake8 import run_flake8
 from tests.sfilter.fixtures import create_temp_file  # noqa
 
 
-@pytest.mark.parametrize("create_temp_file", [{
-    "file_name": "temp_test_flake8.py",
-    "file_content": "\nimport os"
-}], indirect=True)
+@pytest.mark.parametrize(
+    "create_temp_file",
+    [{"file_name": "temp_test_flake8.py", "file_content": "\nimport os"}],
+    indirect=True,
+)
 def test_flake8(create_temp_file):
     """Test that flake8 is launched"""
     error1 = "F401 'os' imported but unused"
