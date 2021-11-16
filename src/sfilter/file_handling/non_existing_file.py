@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import TextIO
 
 from src.sfilter.file_handling import existing_file
 from src.sfilter.file_handling.abstract_file_handler import AFileHandler
@@ -18,6 +19,10 @@ class NonExistingFile(AFileHandler):
         """:return: False (it does not exist)"""
         return False
 
+    def file_path(self) -> str:
+        """This file does not exist. Raise exception"""
+        raise FileNotFoundError(self.name)
+
     def get_content(self) -> str:
         """This file does not exist. Raise exception"""
         raise FileNotFoundError(self.name)
@@ -25,6 +30,10 @@ class NonExistingFile(AFileHandler):
     def name(self) -> str:
         """Return filename"""
         return self.name
+
+    def writable_file(self) -> TextIO:
+        """This file does not exist. Raise exception"""
+        raise FileNotFoundError(self.name)
 
     def write(self, text: str) -> AFileHandler:
         """Create new file and write given text to it

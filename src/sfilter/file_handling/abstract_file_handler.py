@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import TextIO
 
 
 class AFileHandler(ABC):
@@ -17,6 +18,11 @@ class AFileHandler(ABC):
         pass
 
     @abstractmethod
+    def file_path(self) -> str:
+        """return True if file exists, else False"""
+        pass
+
+    @abstractmethod
     def get_content(self) -> str:
         """Get content of the file that was given in constructor
         :return: file content as text
@@ -26,6 +32,11 @@ class AFileHandler(ABC):
     @abstractmethod
     def name(self) -> str:
         """Return filename"""
+        pass
+
+    @abstractmethod
+    def writable_file(self) -> TextIO:
+        """Self evident"""
         pass
 
     @abstractmethod
