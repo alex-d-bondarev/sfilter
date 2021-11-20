@@ -1,15 +1,27 @@
 from pathlib import Path
+from typing import TextIO
 
 from src.sfilter.file_handling import existing_file
-from src.sfilter.file_handling.file_handler_interface import \
-    FileHandlerInterface
+from src.sfilter.file_handling.abstract_file_handler import AFileHandler
 
 
-class NonExistingFile(FileHandlerInterface):
+class NonExistingFile(AFileHandler):
     """Simplify delete flow"""
 
     def __init__(self, name):
         self.name = name
+
+    def delete(self) -> AFileHandler:
+        """Return self as already deleted/non-existing file"""
+        return self
+
+    def exists(self) -> bool:
+        """:return: False (it does not exist)"""
+        return False
+
+    def file_path(self) -> str:
+        """This file does not exist. Raise exception"""
+        raise FileNotFoundError(self.name)
 
     def get_content(self) -> str:
         """This file does not exist. Raise exception"""
@@ -19,7 +31,11 @@ class NonExistingFile(FileHandlerInterface):
         """Return filename"""
         return self.name
 
-    def write(self, text: str) -> FileHandlerInterface:
+    def writable_file(self) -> TextIO:
+        """This file does not exist. Raise exception"""
+        raise FileNotFoundError(self.name)
+
+    def write(self, text: str) -> AFileHandler:
         """Create new file and write given text to it
         :param text:
         """
@@ -27,8 +43,3 @@ class NonExistingFile(FileHandlerInterface):
         new_file.touch()
         new_file.write_text(text)
         return existing_file.ExistingFile(new_file)
-
-
-def delete(self) -> FileHandlerInterface:
-    """Return self as already deleted/non-existing file"""
-    return self
