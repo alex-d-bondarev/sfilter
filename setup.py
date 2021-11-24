@@ -17,6 +17,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "black==21.7b0",
+        "click==8.0.3",
         "ConfigUpdater==3.0.1",
         "flake8==3.9.2",
         "isort==5.9.2",
