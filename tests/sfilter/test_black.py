@@ -1,4 +1,5 @@
 import pytest  # noqa
+
 from src.sfilter.tools.black import run_black
 from tests.sfilter.fixtures import create_temp_file  # noqa
 
