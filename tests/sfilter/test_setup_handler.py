@@ -1,4 +1,5 @@
 import pytest
+
 from src.sfilter.file_handling.file_finder import find_file
 from src.sfilter.main import run_all
 from src.sfilter.setup_handler import SetUpHandler

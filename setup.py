@@ -15,6 +15,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/alex-d-bondarev/sfilter",
     packages=find_packages(),
+    include_package_data=True,
     install_requires=[
         "black==21.7b0",
         "click==8.0.3",
@@ -32,4 +33,9 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Quality Assurance",
     ],
+    entry_points={
+        "console_scripts": [
+            "sfilter=src.sfilter.cli:main",
+        ]
+    },
 )
