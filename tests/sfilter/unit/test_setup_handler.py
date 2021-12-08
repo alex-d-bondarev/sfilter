@@ -1,9 +1,8 @@
 import pytest
 
 from src.sfilter.file_handling.file_finder import find_file
-from src.sfilter.main import run_all
 from src.sfilter.setup_handler import SetUpHandler
-from tests.sfilter.fixtures import roll_back_file  # noqa
+from tests.sfilter.unit.fixtures import roll_back_file  # noqa
 
 
 def test_sfilter_section_is_present():
