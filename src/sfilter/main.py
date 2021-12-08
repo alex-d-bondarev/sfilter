@@ -12,14 +12,14 @@ def clean_before_test() -> None:
     find_file("radon.json").delete()
 
 
-def run_all(dir_path):
+def run_all(path):
     """Run all sfilter steps against given path
 
-    :param dir_path:
+    :param path:
     """
     clean_before_test()
-    run_black(dir_path)
-    run_isort(dir_path)
-    run_flake8(dir_path)
-    run_radon(dir_path)
-    QualityHandler().compare_metrics()
+    run_black(path)
+    run_isort(path)
+    run_flake8(path)
+    run_radon(path)
+    QualityHandler(path).compare_metrics()

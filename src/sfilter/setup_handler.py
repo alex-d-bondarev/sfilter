@@ -11,9 +11,9 @@ SECTION_NAME = "sfilter"
 class SetUpHandler:
     """Handle setup.cfg"""
 
-    def __init__(self):
+    def __init__(self, dir_path: Optional[str] = None):
         self.config = configparser.ConfigParser(allow_no_value=True)
-        self.config_file = find_file("setup.cfg")
+        self.config_file = find_file(name="setup.cfg", dir_path=dir_path)
 
         self.c_updater = ConfigUpdater()
         self.c_updater.read(self.config_file.file_path())
