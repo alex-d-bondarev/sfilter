@@ -11,7 +11,6 @@ class Arguments:
 def parse_arguments(**kwargs: str) -> Arguments:
     """Parse arguments that were given to sfilter
 
-    :param args:
     :param kwargs:
     :return:
     """
