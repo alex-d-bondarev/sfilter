@@ -6,7 +6,6 @@ from src.sfilter.cli import main
 
 def test_one_file():
     file_name = "simple.py"
-    file_path = ""
     runner = CliRunner()
 
     with runner.isolated_filesystem():

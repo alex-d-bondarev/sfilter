@@ -1,16 +1,25 @@
 import json
+from pathlib import Path
 
-from src.sfilter.file_handling.file_finder import find_file
+from src.sfilter.file_handling.file_finder import find_file_by_path
 from src.sfilter.setup_handler import SetUpHandler
 
 
 class QualityHandler:
     """Handle quality metrics"""
 
-    def __init__(self, dir_path: str):
-        self.setup = SetUpHandler(path=dir_path)
-        self.init_flake8 = self.setup.get("flake8")
-        self.init_mi = self.setup.get("mi")
+    def __init__(self, path: str):
+        self.path = path
+        self.setup = SetUpHandler(path=path)
+        self.init_flake8 = self._load_init_value("flake8")
+        self.init_mi = self._load_init_value("mi")
+
+    def _load_init_value(self, key: str):
+        value = self.setup.get(key)
+        if value == "-1":
+            return None
+        else:
+            return value
 
     def compare_metrics(self):
         """Compare initial metrics with new metrics"""
@@ -22,11 +31,19 @@ class QualityHandler:
 
     def _count_flake8_flags(self):
         last_line_does_not_count = 1
-        flake8_content = find_file("flake8.txt").get_content()
+        flake8_content = self._load_content(file_name="flake8.txt")
         self.new_flake8 = len(flake8_content.split("\n")) - last_line_does_not_count
 
+    def _load_content(self, file_name: str):
+        wrapped_path = Path(self.path)
+        if self.path.endswith(".py"):
+            wrapped_path = wrapped_path.parent
+        wrapped_path = wrapped_path / file_name
+        flake8_content = find_file_by_path(wrapped_path).get_content()
+        return flake8_content
+
     def _calculate_mi_stats(self):
-        radon_content = find_file("radon.json").get_content()
+        radon_content = self._load_content(file_name="radon.json")
         radon_dict = json.loads(radon_content)
         mi_scores = 0
 
