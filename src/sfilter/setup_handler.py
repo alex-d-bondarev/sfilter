@@ -1,22 +1,37 @@
 import configparser
+from pathlib import Path
 from typing import Optional
 
 from configupdater import ConfigUpdater
 
-from src.sfilter.file_handling.file_finder import find_file
+from src.sfilter.file_handling.file_finder import find_file, find_file_by_path
 
 SECTION_NAME = "sfilter"
+NEW_CONFIG_FILE="[sfilter]\n# Goal is '0'\nflake8 = 99999\n# Goal is '100'\nmi = 0\n"
 
 
 class SetUpHandler:
     """Handle setup.cfg"""
 
-    def __init__(self, dir_path: Optional[str] = None):
+    def __init__(self, path: Optional[str] = None):
         self.config = configparser.ConfigParser(allow_no_value=True)
-        self.config_file = find_file(name="setup.cfg", dir_path=dir_path)
-
+        self._load_config_file(path)
         self.c_updater = ConfigUpdater()
         self.c_updater.read(self.config_file.file_path())
+
+    def _load_config_file(self, path):
+        if path:
+            wrapped_path = Path(path)
+            if path.endswith(".py"):
+                wrapped_path = wrapped_path.parent / "setup.cfg"
+                self.config_file = find_file_by_path(path=wrapped_path)
+            else:
+                self.config_file = find_file_by_path(path=wrapped_path)
+        else:
+            self.config_file = find_file(name="setup.cfg")
+
+        if not self.config_file.exists():
+            self.config_file = self.config_file.write(NEW_CONFIG_FILE)
 
     def has_section(self, section: str) -> bool:
         """

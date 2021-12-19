@@ -8,7 +8,7 @@ class QualityHandler:
     """Handle quality metrics"""
 
     def __init__(self, dir_path: str):
-        self.setup = SetUpHandler(dir_path=dir_path)
+        self.setup = SetUpHandler(path=dir_path)
         self.init_flake8 = self.setup.get("flake8")
         self.init_mi = self.setup.get("mi")
 
