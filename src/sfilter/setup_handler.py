@@ -7,7 +7,7 @@ from configupdater import ConfigUpdater
 from src.sfilter.file_handling.file_finder import find_file, find_file_by_path
 
 SECTION_NAME = "sfilter"
-NEW_CONFIG_FILE="[sfilter]\n# Goal is '0'\nflake8 = -1\n# Goal is '100'\nmi = -1\n"
+NEW_CONFIG_FILE = "[sfilter]\n# Goal is '0'\nflake8 = -1\n# Goal is '100'\nmi = -1\n"
 
 
 class SetUpHandler:
@@ -23,10 +23,9 @@ class SetUpHandler:
         if path:
             wrapped_path = Path(path)
             if path.endswith(".py"):
-                wrapped_path = wrapped_path.parent / "setup.cfg"
-                self.config_file = find_file_by_path(path=wrapped_path)
-            else:
-                self.config_file = find_file_by_path(path=wrapped_path)
+                wrapped_path = wrapped_path.parent
+            wrapped_path = wrapped_path / "setup.cfg"
+            self.config_file = find_file_by_path(path=wrapped_path)
         else:
             self.config_file = find_file(name="setup.cfg")
 

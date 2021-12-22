@@ -20,7 +20,9 @@ def find_file(name: str, path: Optional[str] = None) -> AFileHandler:
             else:
                 return ExistingFile(Path(path + name))
         else:
-            return ExistingFile(next(Path(__file__).parent.parent.parent.parent.glob(name)))
+            return ExistingFile(
+                next(Path(__file__).parent.parent.parent.parent.glob(name))
+            )
     except StopIteration:
         return NonExistingFile(name)
 

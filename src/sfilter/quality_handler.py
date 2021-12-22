@@ -10,9 +10,7 @@ class QualityHandler:
 
     def __init__(self, path: str):
         self.path = path
-        self.setup = SetUpHandler(path=path)
-        self.init_flake8 = self._load_init_value("flake8")
-        self.init_mi = self._load_init_value("mi")
+        self.config_is_in_root = True
 
     def _load_init_value(self, key: str):
         value = self.setup.get(key)
@@ -25,9 +23,18 @@ class QualityHandler:
         """Compare initial metrics with new metrics"""
         self._count_flake8_flags()
         self._calculate_mi_stats()
+        self._calculate_metrics_before()
         self._compare_flake8()
         self._compare_mi()
         self._save_result()
+
+    def _calculate_metrics_before(self):
+        if self.config_is_in_root:
+            self.setup = SetUpHandler()
+        else:
+            self.setup = SetUpHandler(path=self.path)
+        self.init_flake8 = self._load_init_value("flake8")
+        self.init_mi = self._load_init_value("mi")
 
     def _count_flake8_flags(self):
         last_line_does_not_count = 1
@@ -36,11 +43,20 @@ class QualityHandler:
 
     def _load_content(self, file_name: str):
         wrapped_path = Path(self.path)
-        if self.path.endswith(".py"):
-            wrapped_path = wrapped_path.parent
-        wrapped_path = wrapped_path / file_name
+        wrapped_path = self._generate_file_path(file_name, wrapped_path)
         flake8_content = find_file_by_path(wrapped_path).get_content()
         return flake8_content
+
+    def _generate_file_path(self, file_name, wrapped_path):
+        path = Path(file_name)
+        if path.exists():
+            return path
+        else:
+            self.config_is_in_root = False
+            if self.path.endswith(".py"):
+                wrapped_path = wrapped_path.parent
+            wrapped_path = wrapped_path / file_name
+            return wrapped_path
 
     def _calculate_mi_stats(self):
         radon_content = self._load_content(file_name="radon.json")
