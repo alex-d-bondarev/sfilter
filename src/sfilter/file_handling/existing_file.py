@@ -11,6 +11,8 @@ class ExistingFile(AFileHandler):
 
     def __init__(self, path: Path):
         self.path_to_file = path
+        if not Path(self.path_to_file).exists():
+            raise FileNotFoundError
 
     def delete(self) -> AFileHandler:
         """Self evident"""

@@ -1,7 +1,7 @@
 import pytest  # noqa
 
 from src.sfilter.tools.isort import run_isort
-from tests.sfilter.fixtures import create_temp_file  # noqa
+from tests.sfilter.unit.fixtures import create_temp_file  # noqa
 
 
 @pytest.mark.parametrize(
