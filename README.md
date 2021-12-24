@@ -47,26 +47,22 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.ru
 
 ### Precondition
 
-- [make](https://www.gnu.org/software/make/) is installed
-- [pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today) is installed
-- [pyenv](https://github.com/pyenv/pyenv#installation) 
-  is installed with the following python versions:
-    - 3.7.12
-    - 3.8.12
-    - 3.9.1
-
-### Install project
-
-```shell
-make install
-```
+1. [make](https://www.gnu.org/software/make/) is installed
+2. [pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today) is installed
+3. [pyenv](https://github.com/pyenv/pyenv#installation) 
+   is installed with the following python versions:
+     - 3.7.12
+     - 3.8.12
+     - 3.9.1 
+4. Run make command:
+   ```shell
+   make install
+   ```
 
 ### Test project
 
-Test the project after each code change by running the following:
-
+Test the project after each code change by running make:
 ```shell
-make install
 make test
 ```
 
