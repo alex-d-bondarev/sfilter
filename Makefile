@@ -20,7 +20,7 @@ test: tox sfilter
 
 tox:
 	@echo "Run tox"
-	pip install tox tox-pyenv
+	pip3 install tox tox-pyenv
 	pyenv local 3.7.12 3.8.12 3.9.1
 	tox
 

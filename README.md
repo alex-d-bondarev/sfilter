@@ -1,7 +1,9 @@
 # sfilter (Pre-Alpha)
+
 Tool for filtering out stinky/smelling code
 
 ## Usage
+
 ### How to
 
 ```shell
@@ -40,8 +42,28 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.ru
     ```shell
     PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.check_quality()'
     ```
-   
+
 ## Install and test the project
+
+### Precondition
+
+- [make](https://www.gnu.org/software/make/) is installed
+- [pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today) is installed
+- [pyenv](https://github.com/pyenv/pyenv#installation) 
+  is installed with the following python versions:
+    - 3.7.12
+    - 3.8.12
+    - 3.9.1
+
+### Install project
+
+```shell
+make install
+```
+
+### Test project
+
+Test the project after each code change by running the following:
 
 ```shell
 make install
@@ -49,6 +71,7 @@ make test
 ```
 
 ## Publish
+
 ### Prepare to publish the project
 
 ```shell
@@ -57,12 +80,14 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
 pipenv shell
 python
 ```
+
 ```python
 import src.sfilter.main as sf
 
 sf.run_all("src/sfilter")
 exit()
 ```
+
 ```shell
 exit
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py sdist
