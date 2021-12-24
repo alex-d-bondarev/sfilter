@@ -3,14 +3,19 @@ Tool for filtering out stinky/smelling code
 
 ## Usage
 ### How to
+
 ```shell
 python -c'import sfilter.main as sf;sf.run_all("<path_to_project>")'
 ```
+
 ### Run all checks example
+
 ```shell
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.run_all("./sfilter")'
 ```
+
 ### Run step by step example
+
 1. Clean before analysis:
     ```shell
     PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.clean_before_test()'
@@ -35,13 +40,17 @@ PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.ru
     ```shell
     PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import sfilter.main as sf;sf.check_quality()'
     ```
+   
 ## Install and test the project
+
 ```shell
 make install
 make test
 ```
+
 ## Publish
 ### Prepare to publish the project
+
 ```shell
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py bdist_wheel
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run pip install -e .
@@ -59,7 +68,9 @@ exit
 PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python setup.py sdist
 tar tzf dist/sfilter-<version>.tar.gz 
 ```
+
 ### Upload to pypi
+
 ```shell
 twine upload dist/*
 ```

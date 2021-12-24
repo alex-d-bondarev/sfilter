@@ -16,7 +16,13 @@ install:
 	pipenv install
 
 
-test: pytest sfilter
+test: tox sfilter
+
+tox:
+	@echo "Run tox"
+	pip install tox tox-pyenv
+	pyenv local 3.7.12 3.8.12 3.9.1
+	tox
 
 pytest:
 	@echo "Run tests"

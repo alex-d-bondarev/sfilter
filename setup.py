@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 setup(
     name="sfilter",
     version="0.1.0",
-    python_requires=">=3.9",
+    python_requires=">=3.7",
     author="Sasha Bondarev (Oleksandr)",
     author_email="alex.d.bondarev@gmail.com",
     license="MIT",
