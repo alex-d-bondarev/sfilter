@@ -1,3 +1,4 @@
+import logging
 import os
 from pathlib import Path
 from typing import TextIO
@@ -15,8 +16,11 @@ class ExistingFile(AFileHandler):
             raise FileNotFoundError
 
     def delete(self) -> AFileHandler:
-        """Self evident"""
-        self.path_to_file.unlink(missing_ok=True)
+        """Delete file if it still exists"""
+        try:
+            self.path_to_file.unlink()
+        except FileNotFoundError as e:
+            logging.exception(e, exc_info=True)
         return non_existing_file.NonExistingFile(self.path_to_file.name)
 
     def exists(self) -> bool:
