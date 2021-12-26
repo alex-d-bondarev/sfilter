@@ -1,5 +1,4 @@
 import json
-import logging
 from pathlib import Path
 
 from src.sfilter.file_handling.file_finder import find_file_by_path
@@ -22,14 +21,12 @@ class QualityHandler:
 
     def compare_metrics(self):
         """Compare initial metrics with new metrics"""
-        logging.info("Start comparing sfilter metrics")
         self._count_new_flake8_flags()
         self._calculate_new_mi_stats()
         self._load_previous_metrics()
         self._compare_flake8()
         self._compare_mi()
         self._save_result()
-        logging.info("Finish comparing sfilter metrics")
 
     def _load_previous_metrics(self):
         if self.config_is_in_root:
