@@ -34,6 +34,12 @@ make test
 
 ## Publish
 
+### Test locally
+
+```shell
+pip install -e .
+```
+
 ### Prepare to publish the project
 
 ```shell
