@@ -12,13 +12,6 @@ class QualityHandler:
         self.path = path
         self.config_is_in_root = False
 
-    def _load_init_value(self, key: str):
-        value = self.setup.get(key)
-        if value == "-1":
-            return None
-        else:
-            return value
-
     def compare_metrics(self):
         """Compare initial metrics with new metrics"""
         self._count_new_flake8_flags()
@@ -35,6 +28,13 @@ class QualityHandler:
             self.setup = SetUpHandler(path=self.path)
         self.init_flake8 = self._load_init_value("flake8")
         self.init_mi = self._load_init_value("mi")
+
+    def _load_init_value(self, key: str):
+        value = self.setup.get(key)
+        if value == "-1":
+            return None
+        else:
+            return value
 
     def _count_new_flake8_flags(self):
         last_line_does_not_count = 1

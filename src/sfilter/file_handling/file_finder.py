@@ -39,7 +39,7 @@ def find_file_by_path(path: Path) -> AFileHandler:
         return NonExistingFile(str(path))
 
 
-def find_file_relative(file_name: str) -> AFileHandler:
+def find_file_relative(name: str) -> AFileHandler:
     """Find file in the current directory and return it in the form of AFileHandler"""
-    relative_file_path = Path(".") / file_name
+    relative_file_path = Path(".") / name
     return find_file_by_path(relative_file_path)
