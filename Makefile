@@ -31,5 +31,5 @@ pytest:
 
 sfilter:
 	@echo "Run sfilter"
-	PIPENV_IGNORE_VIRTUALENVS=1 pipenv run python -c'import src.sfilter.main as sf;sf.run_all("./src")'
-
+	pip install -e .
+	sfilter ./src
